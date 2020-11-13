@@ -6,5 +6,6 @@ target 'ChatTogether' do
   use_frameworks!
 
   # Pods for ChatTogether
+  pod 'SnapKit', '~> 5.0.0'
 
 end
