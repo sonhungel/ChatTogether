@@ -21,7 +21,7 @@ class WelcomeViewController: UIViewController {
         return welText
     }()
     
-    private let loginButton:UIButton = {
+    @objc private let loginButton:UIButton = {
         let button = UIButton()
         button.setTitle("LOG IN", for: .normal)
         //button.backgroundColor = .purple
@@ -54,8 +54,10 @@ class WelcomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
 
-        view.backgroundColor = .white       //view.addSubview(welcomeText)
+        view.backgroundColor = .white
         view.addSubview(imageBackground)
         view.addSubview(welcomeText)
         view.addSubview(imageDecorTop)
@@ -100,6 +102,12 @@ class WelcomeViewController: UIViewController {
             make.trailing.equalTo(self.view).offset(-40)
         }
         
+    }
+    
+    @objc private func loginButtonTapped()
+    {
+        let vc = SignInViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }
