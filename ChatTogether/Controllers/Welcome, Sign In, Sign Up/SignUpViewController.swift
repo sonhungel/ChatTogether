@@ -52,8 +52,7 @@ class SignUpViewController: UIViewController {
         return button
 
     }()
-    
-    
+     
     private let imageBackground:UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "signup")
@@ -81,10 +80,10 @@ class SignUpViewController: UIViewController {
         field.returnKeyType = .continue
         field.layer.cornerRadius = 30
         field.placeholder = "Your Email"
-        let imageView = UIImageView(image: UIImage(named: "icon_email"))
-        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        field.leftView = imageView
+//        let imageView = UIImageView(image: UIImage(named: "icon_email"))
+//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+//        field.leftView = imageView
         field.leftViewMode = .always
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
         return field
@@ -98,10 +97,10 @@ class SignUpViewController: UIViewController {
         field.returnKeyType = .done
         field.layer.cornerRadius = 30
         field.placeholder = "Your Password"
-        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
-        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        field.leftView = imageView
+//        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
+//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+//        field.leftView = imageView
         field.leftViewMode = .always
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
         field.isSecureTextEntry = true
@@ -115,13 +114,62 @@ class SignUpViewController: UIViewController {
         field.returnKeyType = .done
         field.layer.cornerRadius = 30
         field.placeholder = "Your Name"
+        
+//        let imageView = UIImageView(image: UIImage(named: "icon_user"))
+//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+//        field.leftView = imageView
+        field.leftViewMode = .always
+        field.rightViewMode = .always
+       
+        field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
+        return field
+    }()
+    
+    private let addImageButton:UIButton = {
+        let addImageButton = UIButton()
+        var imageButton = UIImage(named: "icon_addImage")
+        //imageButton = imageButton?.withRenderingMode(.alwaysTemplate)
+        //imageButton?.withTintColor(UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9))
+        //imageButton.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+        addImageButton.setImage(imageButton, for: .normal)
+        return addImageButton
+    }()
+    
+    private let imageEmail:UIView = {
+        let view = UIView()
+        view.frame.size = CGSize(width: 40, height: 20)
+        let imageView = UIImageView(image: UIImage(named: "icon_email"))
+        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+       
+        //imageView.backgroundColor = .black
+        view.addSubview(imageView)
+        return view
+    }()
+    
+    private let imagePass:UIView = {
+        let view = UIView()
+        view.frame.size = CGSize(width: 40, height: 20)
+        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
+        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+        
+        //imageView.backgroundColor = .black
+        view.addSubview(imageView)
+        return view
+    }()
+    
+    private let imageUser:UIView = {
+        let view = UIView()
+        view.frame.size = CGSize(width: 40, height: 20)
         let imageView = UIImageView(image: UIImage(named: "icon_user"))
         imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        field.leftView = imageView
-        field.leftViewMode = .always
-        field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
-        return field
+        
+        //imageView.backgroundColor = .black
+        view.addSubview(imageView)
+        return view
     }()
     
     private let orDivider:UIView = {
@@ -139,8 +187,12 @@ class SignUpViewController: UIViewController {
         view.addSubview(imageDecorBottom)
         view.addSubview(signUpText)
         view.addSubview(userNameTextField)
+        userNameTextField.rightView = addImageButton
+        userNameTextField.leftView = imageUser
         view.addSubview(emailTextField)
+        emailTextField.leftView = imageEmail
         view.addSubview(passwordTextField)
+        passwordTextField.leftView = imagePass
         view.addSubview(signUpButton)
         view.addSubview(questionLabel)
         view.addSubview(signInButton)
@@ -148,6 +200,8 @@ class SignUpViewController: UIViewController {
         
         signInButton.addTarget(self, action: #selector(signinButtonTapped), for: .touchUpInside)// to go back signIn page
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
+        addImageButton.addTarget(self, action: #selector(didTapAddImageProfile), for: .touchUpInside)
         
         userNameTextField.delegate = self
         emailTextField.delegate = self
@@ -172,6 +226,7 @@ class SignUpViewController: UIViewController {
             make.top.greaterThanOrEqualTo(self.view).offset(35)
             make.leading.equalTo(self.view).offset(45)
             make.trailing.equalTo(self.view).offset(-45)
+            make.bottom.equalTo(self.view).offset(-400)
         }
         
         imageDecorTop.snp.makeConstraints { (make) ->Void in
@@ -259,13 +314,17 @@ class SignUpViewController: UIViewController {
     }
     
     func alertUserLoginError() {
-            let alert = UIAlertController(title: "Woops",
-                                          message: "Please enter all information to create a new account.",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title:"Dismiss",
-                                          style: .cancel, handler: nil))
-            present(alert, animated: true)
-        }
+        let alert = UIAlertController(title: "Woops",
+                                      message: "Please enter all information to create a new account.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title:"Dismiss",
+                                      style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    @objc private func didTapAddImageProfile(){
+        presentPhotoActionSheet()
+    }
     
 }
 
@@ -295,5 +354,55 @@ extension SignUpViewController:UITextFieldDelegate{
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+}
+
+extension SignUpViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func presentPhotoActionSheet()
+    {
+        let actionSheet = UIAlertController(title: "Profile Picture", message: "How would you like to select picture?", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { [weak self ] _ in
+            self?.presentCamera()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Choose Photo", style: .default, handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func presentCamera()
+    {
+        let viewController = UIImagePickerController()
+        viewController.sourceType = .camera
+        viewController.delegate = self
+        viewController.allowsEditing = true
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func presentPhotoPicker()
+    {
+        let viewController = UIImagePickerController()
+        viewController.sourceType = .photoLibrary
+        viewController.delegate = self
+        viewController.allowsEditing = true
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        
+        self.imageBackground.image = selectedImage
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

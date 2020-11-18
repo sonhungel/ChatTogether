@@ -81,10 +81,10 @@ class SignInViewController: UIViewController {
         field.returnKeyType = .continue
         field.layer.cornerRadius = 30
         field.placeholder = "Your Email"
-        let imageView = UIImageView(image: UIImage(named: "icon_email"))
-        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        field.leftView = imageView
+//        let imageView = UIImageView(image: UIImage(named: "icon_email"))
+//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+//        field.leftView = imageView
         
         field.leftViewMode = .always
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
@@ -100,15 +100,39 @@ class SignInViewController: UIViewController {
         field.layer.cornerRadius = 30
  
         field.placeholder = "Your Password"
-        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
-        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        field.leftView = imageView
+//        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
+//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+//        field.leftView = imageView
         field.leftViewMode = .always
         
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
         field.isSecureTextEntry = true
         return field
+    }()
+    
+    private let imageEmail:UIView = {
+        let view = UIView()
+        view.frame.size = CGSize(width: 40, height: 20)
+        let imageView = UIImageView(image: UIImage(named: "icon_email"))
+        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+       
+        //imageView.backgroundColor = .black
+        view.addSubview(imageView)
+        return view
+    }()
+    
+    private let imagePass:UIView = {
+        let view = UIView()
+       view.frame.size = CGSize(width: 40, height: 20)
+        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
+        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+       
+        //imageView.backgroundColor = .black
+        view.addSubview(imageView)
+        return view
     }()
 
     override func viewDidLoad() {
@@ -131,6 +155,9 @@ class SignInViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        emailTextField.leftView = imageEmail
+        passwordTextField.leftView = imagePass
         
         self.hideKeyboardWhenTappedAround()
     }
@@ -204,6 +231,12 @@ class SignInViewController: UIViewController {
             make.top.equalTo(loginButton.snp.bottom).offset(10)
             make.leading.equalTo(questionLabel.snp.trailing).offset(5)
         }
+//
+//        imageEmail.snp.makeConstraints { (make) ->Void in
+//            make.left.equalTo(emailTextField).offset(20)
+//            make.top.equalTo(emailTextField).offset(10)
+//            make.size.equalTo(CGSize(width: 20, height: 10))
+//        }
         
     }
     

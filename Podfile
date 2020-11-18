@@ -7,5 +7,10 @@ target 'ChatTogether' do
 
   # Pods for ChatTogether
   pod 'SnapKit', '~> 5.0.0'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
 end
