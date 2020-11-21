@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3403859AAD9170F3B3B1F5AA /* Pods_ChatTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C6844117E527E9D7925E40 /* Pods_ChatTogether.framework */; };
+		95460EB02566C33E00FEEBDF /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95460EAF2566C33E00FEEBDF /* DatabaseManager.swift */; };
 		95609208255CE3F3001A62E7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95609207255CE3F3001A62E7 /* WelcomeViewController.swift */; };
 		9561C46E2556FA170028BD21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C46D2556FA170028BD21 /* AppDelegate.swift */; };
 		9561C4702556FA170028BD21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C46F2556FA170028BD21 /* SceneDelegate.swift */; };
@@ -21,12 +22,13 @@
 		9561C492255713A70028BD21 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C491255713A70028BD21 /* PhotoViewerViewController.swift */; };
 		9561C495255713C90028BD21 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C494255713C90028BD21 /* VideoPlayerViewController.swift */; };
 		9561C498255713DE0028BD21 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C497255713DE0028BD21 /* NewConversationViewController.swift */; };
-		95DCEDBB25641DDC007BDF6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95DCEDBA25641DDC007BDF6D /* GoogleService-Info.plist */; };
+		9576F86E256571EF00D25D6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9576F86D256571EF00D25D6B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B460D395A889DD5B00C6816 /* Pods-ChatTogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatTogether.debug.xcconfig"; path = "Target Support Files/Pods-ChatTogether/Pods-ChatTogether.debug.xcconfig"; sourceTree = "<group>"; };
 		82C6844117E527E9D7925E40 /* Pods_ChatTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95460EAF2566C33E00FEEBDF /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		95609207255CE3F3001A62E7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9561C46A2556FA170028BD21 /* ChatTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9561C46D2556FA170028BD21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +44,7 @@
 		9561C491255713A70028BD21 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		9561C494255713C90028BD21 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9561C497255713DE0028BD21 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
-		95DCEDBA25641DDC007BDF6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9576F86D256571EF00D25D6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1C43BD730D0C3F5E02B4565 /* Pods-ChatTogether.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatTogether.release.xcconfig"; path = "Target Support Files/Pods-ChatTogether/Pods-ChatTogether.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,7 +112,7 @@
 				9561C483255709C30028BD21 /* Views */,
 				9561C482255709B00028BD21 /* Controllers */,
 				9561C47B2556FA190028BD21 /* Info.plist */,
-				95DCEDBA25641DDC007BDF6D /* GoogleService-Info.plist */,
+				9576F86D256571EF00D25D6B /* GoogleService-Info.plist */,
 			);
 			path = ChatTogether;
 			sourceTree = "<group>";
@@ -143,6 +145,7 @@
 			children = (
 				9561C46D2556FA170028BD21 /* AppDelegate.swift */,
 				9561C46F2556FA170028BD21 /* SceneDelegate.swift */,
+				95460EAF2566C33E00FEEBDF /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -207,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9561C47A2556FA190028BD21 /* LaunchScreen.storyboard in Resources */,
-				95DCEDBB25641DDC007BDF6D /* GoogleService-Info.plist in Resources */,
+				9576F86E256571EF00D25D6B /* GoogleService-Info.plist in Resources */,
 				9561C4772556FA190028BD21 /* Assets.xcassets in Resources */,
 				9561C4752556FA170028BD21 /* Main.storyboard in Resources */,
 			);
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9561C48F2557138D0028BD21 /* ProfileViewController.swift in Sources */,
+				95460EB02566C33E00FEEBDF /* DatabaseManager.swift in Sources */,
 				95609208255CE3F3001A62E7 /* WelcomeViewController.swift in Sources */,
 				9561C489255710540028BD21 /* SignInViewController.swift in Sources */,
 				9561C48C2557137A0028BD21 /* SignUpViewController.swift in Sources */,

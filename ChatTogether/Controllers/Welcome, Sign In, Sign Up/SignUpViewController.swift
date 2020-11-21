@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     //    setup entities
@@ -306,6 +307,32 @@ class SignUpViewController: UIViewController {
             alertUserLoginError()
             return
         }
+        // firebase sign up
+        
+        DatabaseManager.shared.userExists(with: email, completion: { [weak self ]exists in
+            guard let strongSelf = self else {
+                return
+            }
+            guard !exists else
+            {
+                /// This user already exists
+                strongSelf.alertUserLoginError(message: "Looks like a user account for that email address already exists!")
+                return
+            }
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: pass) { authResult, error in
+                
+                guard let result = authResult, error == nil else {
+                    print("Error creating user")
+                    return
+                }
+                DatabaseManager.shared.insertUser(with: ChatTogetherAppUser(userName: userName, emailAdress: email))
+                
+                let user = result.user
+                print("Create user :\(user)")
+                
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            }
+        })
     }
     
     @objc private func signinButtonTapped()
@@ -313,9 +340,9 @@ class SignUpViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func alertUserLoginError() {
+    func alertUserLoginError(message:String = "Please enter all information to create a new account.") {
         let alert = UIAlertController(title: "Woops",
-                                      message: "Please enter all information to create a new account.",
+                                      message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title:"Dismiss",
                                       style: .cancel, handler: nil))

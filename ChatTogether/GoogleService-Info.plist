@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>715535767618-56op41ukq4insvdplq4624sv2ib0vn4d.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.715535767618-56op41ukq4insvdplq4624sv2ib0vn4d</string>
+	<key>API_KEY</key>
+	<string>AIzaSyADSrp9ZO5cnA7NdZdhYl6uU0TLd1wD_2A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>715535767618</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Sonhungel.ChatTogether</string>
+	<key>PROJECT_ID</key>
+	<string>chattogether-sonhungel</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chattogether-sonhungel.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:715535767618:ios:77858781561dac63d2b5db</string>
+	<key>DATABASE_URL</key>
+	<string>https://chattogether-sonhungel.firebaseio.com/</string>
+</dict>
+</plist>
