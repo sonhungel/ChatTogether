@@ -13,4 +13,19 @@ target 'ChatTogether' do
   pod 'Firebase/Storage'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
+  
+  # Facebook Login
+  pod 'FBSDKLoginKit'
+  
+  # Google Sign In
+  pod 'GoogleSignIn', '~> 5.0'
+  
+  # automatically match the deployment target
+  post_install do |pi|
+      pi.pods_project.targets.each do |t|
+        t.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+      end
+  end
 end

@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
+import FBSDKLoginKit
+import GoogleSignIn
 
 class SignInViewController: UIViewController {
 //    setup entities
@@ -120,26 +122,54 @@ class SignInViewController: UIViewController {
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
        
         //imageView.backgroundColor = .black
+        imageView.center = view.center
         view.addSubview(imageView)
         return view
     }()
     
     private let imagePass:UIView = {
         let view = UIView()
-       view.frame.size = CGSize(width: 40, height: 20)
+        view.frame.size = CGSize(width: 40, height: 20)
+        //view.backgroundColor = .black
         let imageView = UIImageView(image: UIImage(named: "icon_pass"))
         imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
        
         //imageView.backgroundColor = .black
+        imageView.center = view.center
         view.addSubview(imageView)
+        
         return view
+    }()
+    
+    private let faceBookLoginButton: FBLoginButton = {
+        let button = FBLoginButton()
+        button.permissions = ["public_profile", "email"]
+        
+        // normal
+        button.setTitleColor(.clear, for: .normal)
+        button.setImage(UIImage(named: "facebook"), for: .normal)
+
+        //button.setBackgroundImage(nil, for: .normal)
+        
+//        // tapped
+//        button.setTitleColor(.clear, for: .highlighted)
+//        button.setImage(nil, for: .highlighted)
+//        button.setBackgroundImage(nil, for: .highlighted)
+        return button
+    }()
+    
+    private let googleLoginButton:GIDSignInButton = {
+        let button = GIDSignInButton()
+        return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        
 //  add subview to superView
         view.addSubview(imageBackground)
         view.addSubview(imageDecorTop)
@@ -150,17 +180,22 @@ class SignInViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(questionLabel)
         view.addSubview(signUpButton)
+        view.addSubview(faceBookLoginButton)
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        faceBookLoginButton.delegate = self
+        
         
         emailTextField.leftView = imageEmail
         passwordTextField.leftView = imagePass
         
         self.hideKeyboardWhenTappedAround()
+    
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -231,6 +266,11 @@ class SignInViewController: UIViewController {
         signUpButton.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(loginButton.snp.bottom).offset(10)
             make.leading.equalTo(questionLabel.snp.trailing).offset(5)
+        }
+        
+        faceBookLoginButton.snp.makeConstraints { (make) ->Void in
+            make.top.equalTo(questionLabel.snp.bottom)
+            //make.bottom.equalTo(self.view)
         }
 //
 //        imageEmail.snp.makeConstraints { (make) ->Void in
@@ -308,6 +348,57 @@ extension SignInViewController:UITextFieldDelegate{
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension SignInViewController :LoginButtonDelegate{
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        /// no operation
+    }
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else {
+            print("User failed to log in with Facebook")
+            return
+        }
+        
+        let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], tokenString: token, version: nil, httpMethod: .get)
+        
+        facebookRequest.start(completionHandler: { connection, result, error in
+            guard let result = result as? [String:Any], error == nil else
+            {
+                print("Failed to make facebook graph request")
+                return
+            }
+            print("\(result)")
+            
+            
+            guard let userName = result["name"]  as? String,
+                  let email = result["email"] as? String else {
+                print("Faield to get email and name from fb result")
+                return
+            }
+            
+            DatabaseManager.shared.userExists(with: email, completion: { exists in
+                if !exists {
+                    DatabaseManager.shared.insertUser(with: ChatTogetherAppUser(userName: userName, emailAdress: email))
+                }
+            })
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: token)
+            FirebaseAuth.Auth.auth().signIn(with: credential, completion: { [weak self]authResult, error in
+                guard let strongSelf = self else {
+                    return
+                }
+                guard authResult != nil , error == nil else {
+                    print("Facebook credential login failed, MFA maybe needed")
+                    return
+                }
+                
+                print("Succesfully logged user in")
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
+        })
     }
 }
 

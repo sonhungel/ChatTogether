@@ -128,11 +128,13 @@ class SignUpViewController: UIViewController {
     }()
     
     private let addImageButton:UIButton = {
+ 
         let addImageButton = UIButton()
         var imageButton = UIImage(named: "icon_addImage")
         //imageButton = imageButton?.withRenderingMode(.alwaysTemplate)
         //imageButton?.withTintColor(UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9))
         //imageButton.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
+        //addImageButton.backgroundColor = .black
         addImageButton.setImage(imageButton, for: .normal)
         return addImageButton
     }()
@@ -145,6 +147,7 @@ class SignUpViewController: UIViewController {
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
        
         //imageView.backgroundColor = .black
+        imageView.center = view.center
         view.addSubview(imageView)
         return view
     }()
@@ -157,6 +160,7 @@ class SignUpViewController: UIViewController {
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
         
         //imageView.backgroundColor = .black
+        imageView.center = view.center
         view.addSubview(imageView)
         return view
     }()
@@ -169,6 +173,7 @@ class SignUpViewController: UIViewController {
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
         
         //imageView.backgroundColor = .black
+        imageView.center = view.center
         view.addSubview(imageView)
         return view
     }()
@@ -188,8 +193,10 @@ class SignUpViewController: UIViewController {
         view.addSubview(imageDecorBottom)
         view.addSubview(signUpText)
         view.addSubview(userNameTextField)
+        
         userNameTextField.rightView = addImageButton
         userNameTextField.leftView = imageUser
+        
         view.addSubview(emailTextField)
         emailTextField.leftView = imageEmail
         view.addSubview(passwordTextField)
@@ -321,14 +328,14 @@ class SignUpViewController: UIViewController {
             }
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: pass) { authResult, error in
                 
-                guard let result = authResult, error == nil else {
+                guard  authResult != nil , error == nil else {
                     print("Error creating user")
                     return
                 }
                 DatabaseManager.shared.insertUser(with: ChatTogetherAppUser(userName: userName, emailAdress: email))
                 
-                let user = result.user
-                print("Create user :\(user)")
+                let user = authResult?.user
+                print("Create user :\(String(describing: user))")
                 
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
