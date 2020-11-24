@@ -163,11 +163,23 @@ class SignInViewController: UIViewController {
         let button = GIDSignInButton()
         return button
     }()
+    
+    private var loginObserve: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+        
+        loginObserve = NotificationCenter.default.addObserver(forName: Notification.Name.didLogInNotification , object: nil, queue: .main, using: { [weak self]_ in
+          
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil )
+        })
+        
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
 //  add subview to superView
@@ -181,6 +193,7 @@ class SignInViewController: UIViewController {
         view.addSubview(questionLabel)
         view.addSubview(signUpButton)
         view.addSubview(faceBookLoginButton)
+        view.addSubview(googleLoginButton)
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
@@ -201,6 +214,12 @@ class SignInViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         emailTextField.becomeFirstResponder()
+    }
+    
+    deinit {
+        if let observe = loginObserve {
+            NotificationCenter.default.removeObserver(observe)
+        }
     }
     
 //    autolayout
@@ -272,12 +291,9 @@ class SignInViewController: UIViewController {
             make.top.equalTo(questionLabel.snp.bottom)
             //make.bottom.equalTo(self.view)
         }
-//
-//        imageEmail.snp.makeConstraints { (make) ->Void in
-//            make.left.equalTo(emailTextField).offset(20)
-//            make.top.equalTo(emailTextField).offset(10)
-//            make.size.equalTo(CGSize(width: 20, height: 10))
-//        }
+        googleLoginButton.snp.makeConstraints { (make) ->Void in
+            make.top.equalTo(faceBookLoginButton.snp.bottom)
+        }
         
     }
     

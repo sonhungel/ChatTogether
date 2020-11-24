@@ -55,10 +55,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             }
             return
         }
-        guard let authentication = user.authentication else { return }
+        guard let user = user else {
+            return
+        }
+        
+        print("Sign In with google : \(user)")
+        
+        guard let email = user.profile.email, let userName = user.profile.name else {
+            return
+        }
+        
+        DatabaseManager.shared.userExists(with: email, completion: { exist in
+            if !exist {
+                // insert user to database
+                DatabaseManager.shared.insertUser(with: ChatTogetherAppUser(userName: userName, emailAdress: email))
+            }
+        })
+        
+        guard let authentication = user.authentication else {
+            print("Missing auth object off Google User")
+            return }
           let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                             accessToken: authentication.accessToken)
-          // ...
+        FirebaseAuth.Auth.auth().signIn(with: credential, completion: { authResult, error in
+            guard authResult != nil, error == nil else {
+                print("Failed to Sign in with Google credential")
+                return
+            }
+            print("Succesfully Sign in with Google Credential")
+            NotificationCenter.default.post(name: .didLogInNotification, object: nil)
+        })
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
