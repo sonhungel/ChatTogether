@@ -65,6 +65,8 @@ class SignUpViewController: UIViewController {
         return imageView
     }()
     
+    private let profileImage = UIImageView()
+    
     private let imageDecorTop:UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "signup_top")
@@ -343,8 +345,26 @@ class SignUpViewController: UIViewController {
                     print("Error creating user")
                     return
                 }
-                DatabaseManager.shared.insertUser(with: ChatTogetherAppUser(userName: userName, emailAdress: email))
                 
+                let chatUser = ChatTogetherAppUser(userName: userName, emailAdress: email)
+                DatabaseManager.shared.insertUser(with: chatUser, completion: {success in
+                    if success {
+                        // upload image
+                        guard let image = strongSelf.profileImage.image, let data = image.pngData() else {
+                            return
+                        }
+                        let fileName = chatUser.profilePictureFileName
+                        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, completion: { result in
+                            switch result {
+                            case .success(let downloadUrl):
+                                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                print(downloadUrl)
+                            case .failure(let error):
+                                print("Storage maanger error: \(error)")
+                            }
+                        })
+                    }
+                })
                 let user = authResult?.user
                 print("Create user :\(String(describing: user))")
                 
@@ -440,12 +460,13 @@ extension SignUpViewController:UIImagePickerControllerDelegate, UINavigationCont
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
+        picker.dismiss(animated: true, completion: nil)
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
-        
-        self.imageBackground.image = selectedImage
+        self.profileImage.image = selectedImage
     }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
