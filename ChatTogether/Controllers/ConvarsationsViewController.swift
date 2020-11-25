@@ -32,10 +32,18 @@ class ConvarsationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
+        
         view.addSubview(tableView)
         view.addSubview(noConvarsationsLabel)
         setupTableView()
         fetchConvarsations()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +71,17 @@ class ConvarsationsViewController: UIViewController {
     
     private func fetchConvarsations()
     {
+        tableView.isHidden = false
+    }
+    
+    // choose New Convarsation
+    @objc func didTapComposeButton()
+    {
+        let newConvar = NewConversationViewController()
         
+        let navController = UINavigationController(rootViewController: newConvar)
+        
+        present(navController, animated: true, completion: nil)
     }
 
 }
@@ -76,6 +94,7 @@ extension ConvarsationsViewController: UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "Hello"
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

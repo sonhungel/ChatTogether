@@ -10,8 +10,11 @@ import SnapKit
 import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
+import JGProgressHUD
 
 class SignInViewController: UIViewController {
+    
+    private let spinner = JGProgressHUD(style: .dark)
 //    setup entities
     private let loginText:UITextView = {
         let welText = UITextView()
@@ -307,6 +310,8 @@ class SignInViewController: UIViewController {
             return
         }
         
+        spinner.show(in: view)
+        
         // firebase sign in
         
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: pass) { [weak self ]authResult, error in
@@ -314,6 +319,11 @@ class SignInViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
+            
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
+            }
+            
             guard let result = authResult, error == nil else {
                 print("Failed to login user with email :\(email)")
                 return

@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
+import JGProgressHUD
 
 class SignUpViewController: UIViewController {
+    
+    private let spinner = JGProgressHUD(style: .dark)
+    
     //    setup entities
     private let signUpText:UITextView = {
         let welText = UITextView()
@@ -314,12 +318,19 @@ class SignUpViewController: UIViewController {
             alertUserLoginError()
             return
         }
+        
+        spinner.show(in: view)
+        
         // firebase sign up
         
         DatabaseManager.shared.userExists(with: email, completion: { [weak self ]exists in
             guard let strongSelf = self else {
                 return
             }
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
+            }
+            
             guard !exists else
             {
                 /// This user already exists

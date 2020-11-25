@@ -25,6 +25,7 @@
 		9561C495255713C90028BD21 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C494255713C90028BD21 /* VideoPlayerViewController.swift */; };
 		9561C498255713DE0028BD21 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C497255713DE0028BD21 /* NewConversationViewController.swift */; };
 		9576F86E256571EF00D25D6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9576F86D256571EF00D25D6B /* GoogleService-Info.plist */; };
+		95943260256EACAD00ECDC58 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594325F256EACAD00ECDC58 /* ChatModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		9561C494255713C90028BD21 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9561C497255713DE0028BD21 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		9576F86D256571EF00D25D6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9594325F256EACAD00ECDC58 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		D1C43BD730D0C3F5E02B4565 /* Pods-ChatTogether.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatTogether.release.xcconfig"; path = "Target Support Files/Pods-ChatTogether/Pods-ChatTogether.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 		9561C46C2556FA170028BD21 /* ChatTogether */ = {
 			isa = PBXGroup;
 			children = (
+				9594325E256EAC9600ECDC58 /* Models */,
 				9561C485255709D90028BD21 /* Resources */,
 				9561C483255709C30028BD21 /* Views */,
 				9561C482255709B00028BD21 /* Controllers */,
@@ -124,8 +127,8 @@
 		9561C482255709B00028BD21 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				95609204255CE2E3001A62E7 /* Welcome, Sign In, Sign Up */,
 				9561C4712556FA170028BD21 /* ConvarsationsViewController.swift */,
+				95609204255CE2E3001A62E7 /* Welcome, Sign In, Sign Up */,
 				952BFAA6256E14C8000DF165 /* ChatViewController.swift */,
 				9561C48E2557138D0028BD21 /* ProfileViewController.swift */,
 				9561C491255713A70028BD21 /* PhotoViewerViewController.swift */,
@@ -154,6 +157,14 @@
 				954CFAAC256D6656000D7698 /* Extensions.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9594325E256EAC9600ECDC58 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9594325F256EACAD00ECDC58 /* ChatModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +303,7 @@
 				9561C48F2557138D0028BD21 /* ProfileViewController.swift in Sources */,
 				95460EB02566C33E00FEEBDF /* DatabaseManager.swift in Sources */,
 				95609208255CE3F3001A62E7 /* WelcomeViewController.swift in Sources */,
+				95943260256EACAD00ECDC58 /* ChatModels.swift in Sources */,
 				9561C489255710540028BD21 /* SignInViewController.swift in Sources */,
 				9561C48C2557137A0028BD21 /* SignUpViewController.swift in Sources */,
 				9561C492255713A70028BD21 /* PhotoViewerViewController.swift in Sources */,
