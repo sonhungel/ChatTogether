@@ -20,6 +20,11 @@ target 'ChatTogether' do
   # Google Sign In
   pod 'GoogleSignIn', '~> 5.0'
   
+  pod 'MessageKit'
+  pod 'JGProgressHUD'
+  pod 'RealmSwift'
+  pod 'SDWebImage'
+  
   # automatically match the deployment target
   post_install do |pi|
       pi.pods_project.targets.each do |t|
