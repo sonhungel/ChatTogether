@@ -14,11 +14,11 @@ final class DatabaseManager
     
     private let database = Database.database().reference()
     
-//    static func safeEmail(emailAddress: String)->String{
-//        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "_")
-//        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
-//        return safeEmail
-//    }
+    static func safeEmail(emailAddress: String)->String{
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "_")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
     
 }
 
@@ -47,14 +47,72 @@ extension DatabaseManager{
     /// insert new user to the Database
     public func insertUser(with user:ChatTogetherAppUser, completion : @escaping (Bool) -> Void)
     {
-        database.child(user.safeEmail).setValue(["User_name":user.userName,"Email_address":user.emailAdress],withCompletionBlock: {error, _ in
+        //,"Email_address":user.emailAdress
+        database.child(user.safeEmail).setValue(["User_name":user.userName],withCompletionBlock: {[weak self] error, _ in
+            guard let strongSelf = self else {
+                return
+            }
+            
             guard error == nil else {
                 print("failed ot write to database")
                 completion(false)
                 return
             }
+            
+            strongSelf.database.child("user").observeSingleEvent(of: .value, with: { snapshot in
+                if var usersCollection = snapshot.value as? [[String: String]] {
+                    // append to user dictionary
+                    let newElement = [ "userName": user.userName,"emailAddress": user.safeEmail]
+                    usersCollection.append(newElement)
+                    
+                    strongSelf.database.child("users").setValue(usersCollection, withCompletionBlock: { error, _ in
+                        guard error == nil else {
+                            completion(false)
+                            return
+                        }
+                        completion(true)
+                    })
+                }
+                else{
+                    // create that array
+                   
+                    let newCollection: [[String: String]] = [[ "userName": user.userName, "emailAddress": user.safeEmail ]]
+                    
+                    strongSelf.database.child("users").setValue(newCollection,withCompletionBlock: { error, _ in
+                        guard error == nil else {
+                            completion(false)
+                            return
+                        }
+                        completion(true)
+                    })
+                }
+            })
+            
             completion(true)
         })
+    }
+    
+    /// Gets all users from database
+    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
+        database.child("users").observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [[String: String]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            
+            completion(.success(value))
+        })
+    }
+    
+    public enum DatabaseError: Error {
+        case failedToFetch
+        
+        public var localizedDescription: String {
+            switch self {
+            case .failedToFetch:
+                return "This means blah failed"
+            }
+        }
     }
 }
 

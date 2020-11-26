@@ -316,7 +316,7 @@ class SignUpViewController: UIViewController {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         
-        guard let email = emailTextField.text,let pass = passwordTextField.text,let userName = userNameTextField.text,!email.isEmpty, !pass.isEmpty,!userName.isEmpty else {
+        guard let email = emailTextField.text,let pass = passwordTextField.text,let userName = userNameTextField.text,!email.isEmpty, !pass.isEmpty,!userName.isEmpty, pass.count >= 6 else {
             alertUserLoginError()
             return
         }

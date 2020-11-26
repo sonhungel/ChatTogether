@@ -305,7 +305,7 @@ class SignInViewController: UIViewController {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         
-        guard let email = emailTextField.text,let pass = passwordTextField.text,!email.isEmpty, !pass.isEmpty else {
+        guard let email = emailTextField.text,let pass = passwordTextField.text,!email.isEmpty, !pass.isEmpty,pass.count >= 6 else {
             alertUserLoginError()
             return
         }
@@ -330,8 +330,10 @@ class SignInViewController: UIViewController {
             }
             
             let user = result.user
-            print("Logged In user :\(user)")
             
+            UserDefaults.standard.setValue(email, forKey: "email")
+            
+            print("Logged In user :\(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
@@ -407,6 +409,8 @@ extension SignInViewController :LoginButtonDelegate{
                 print("Faield to get email and name from fb result")
                 return
             }
+            
+            UserDefaults.standard.setValue(email, forKey: "email")
             
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {

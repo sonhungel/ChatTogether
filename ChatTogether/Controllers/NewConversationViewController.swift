@@ -12,6 +12,12 @@ class NewConversationViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
     
+    private var users = [[String: String]]()
+    
+    private var results = [[String:String]]()
+    
+    private var hasFetched = false
+    
     private let searchBar: UISearchBar = {
         
         let searchBar = UISearchBar()
@@ -38,6 +44,11 @@ class NewConversationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(noResultsLabel)
+        view.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
 
         searchBar.delegate = self
         self.view.backgroundColor = .white
@@ -46,15 +57,97 @@ class NewConversationViewController: UIViewController {
         
         searchBar.becomeFirstResponder()
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+        noResultsLabel.frame = CGRect(x: view.frame.width/4,
+                                      y: (view.frame.height-200)/2,
+                                      width: view.frame.width/2,
+                                      height: 200)
+    }
     @objc func dismissSelf()
     {
         dismiss(animated: true, completion: nil)
     }
 }
 
+extension NewConversationViewController:UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        results.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = results[indexPath.row]["userName"]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // start convarsation
+    }
+}
+
 extension NewConversationViewController:UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.replacingOccurrences(of: " ", with: "").isEmpty else {
+            return
+        }
+        searchBar.resignFirstResponder()
         
+        spinner.show(in: view)
+        results.removeAll()
+        searchUser(query: text)
+    }
+    
+    func searchUser(query:String){
+        // check if arry havs firebase result
+        if hasFetched{
+            // if it does: filter
+            filterUsers(with: query)
+        }
+        else{
+            // if not, fetch then filter
+            DatabaseManager.shared.getAllUsers(completion: {[weak self]result in
+                switch result {
+                case .success(let usersCollection):
+                    self?.hasFetched = true
+                    self?.users = usersCollection
+                    self?.filterUsers(with: query)
+                case .failure(let error):
+                    print("Failed to get usres: \(error)")
+                }
+            })
+        }
+    }
+    
+    func filterUsers(with term:String){
+        // update the UI: eitehr show results or show no results label
+        guard hasFetched else {
+            return
+        }
+        
+        let results: [[String:String]] = self.users.filter({
+            guard let name = $0["userName"]?.lowercased()  else {
+                return false
+            }
+            
+            return name.hasPrefix(term.lowercased())
+        })
+        self.results = results
+        
+        updateUI()
+    }
+    
+    func updateUI(){
+        if results.isEmpty {
+            noResultsLabel.isHidden = false
+            tableView.isHidden = true
+        }
+        else {
+            noResultsLabel.isHidden = true
+            tableView.isHidden = false
+            tableView.reloadData()
+        }
     }
 }
