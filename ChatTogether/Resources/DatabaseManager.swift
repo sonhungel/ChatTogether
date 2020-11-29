@@ -215,7 +215,7 @@ extension DatabaseManager{
                 
                 userNode["conversations"] = conversations
                 
-                ref.setValue(userNode, withCompletionBlock: {[weak self] error, _ in
+                ref.setValue(userNode, withCompletionBlock: {error, _ in
                     guard error == nil else {
                         completion(false)
                         return
@@ -226,7 +226,7 @@ extension DatabaseManager{
             }
             else {
                 // Conversation array is not exists for current user
-                // you should append
+
                 userNode["conversations"] = [newConversationData]
                 
                 ref.setValue(userNode, withCompletionBlock: {[weak self] error, _ in
