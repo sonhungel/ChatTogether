@@ -9,8 +9,9 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
-class ConvarsationsViewController: UIViewController {
+class ConversationsViewController: UIViewController {
     
+
     private let spinner = JGProgressHUD(style: .dark)
     
     private let tableView:UITableView = {
@@ -78,15 +79,32 @@ class ConvarsationsViewController: UIViewController {
     @objc func didTapComposeButton()
     {
         let newConvar = NewConversationViewController()
+        newConvar.completion = { [weak self] result in
+//            guard let strongSelf = self else {
+//                return
+//            }
+            print("\(result)")
+            self?.createNewConVersation(result: result)
+        }
         
         let navController = UINavigationController(rootViewController: newConvar)
         
         present(navController, animated: true, completion: nil)
     }
+    private func createNewConVersation(result : [String:String]){
+        guard let email = result["emailAddress"], let name = result["userName"] else {
+            return
+        }
+        let vc = ChatViewController(with: email)
+        vc.isNewConversation = true
+        vc.title = name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }
 
-extension ConvarsationsViewController: UITableViewDataSource,UITableViewDelegate {
+extension ConversationsViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -101,8 +119,8 @@ extension ConvarsationsViewController: UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = ChatViewController()
-        vc.title = "John Smith"
+        let vc = ChatViewController(with: "son@gmail.com")
+        vc.title = "Jmmmmm"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }

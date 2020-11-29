@@ -14,7 +14,7 @@
 		95609208255CE3F3001A62E7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95609207255CE3F3001A62E7 /* WelcomeViewController.swift */; };
 		9561C46E2556FA170028BD21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C46D2556FA170028BD21 /* AppDelegate.swift */; };
 		9561C4702556FA170028BD21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C46F2556FA170028BD21 /* SceneDelegate.swift */; };
-		9561C4722556FA170028BD21 /* ConvarsationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C4712556FA170028BD21 /* ConvarsationsViewController.swift */; };
+		9561C4722556FA170028BD21 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C4712556FA170028BD21 /* ConversationsViewController.swift */; };
 		9561C4752556FA170028BD21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9561C4732556FA170028BD21 /* Main.storyboard */; };
 		9561C4772556FA190028BD21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9561C4762556FA190028BD21 /* Assets.xcassets */; };
 		9561C47A2556FA190028BD21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9561C4782556FA190028BD21 /* LaunchScreen.storyboard */; };
@@ -24,6 +24,9 @@
 		9561C492255713A70028BD21 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C491255713A70028BD21 /* PhotoViewerViewController.swift */; };
 		9561C495255713C90028BD21 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C494255713C90028BD21 /* VideoPlayerViewController.swift */; };
 		9561C498255713DE0028BD21 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C497255713DE0028BD21 /* NewConversationViewController.swift */; };
+		956E6F2E2572013500D13ECA /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F2D2572013500D13ECA /* SearchResult.swift */; };
+		956E6F312572017000D13ECA /* ConversationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F302572017000D13ECA /* ConversationsModels.swift */; };
+		956E6F352572021100D13ECA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F342572021100D13ECA /* ProfileViewModel.swift */; };
 		9576F86E256571EF00D25D6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9576F86D256571EF00D25D6B /* GoogleService-Info.plist */; };
 		95943260256EACAD00ECDC58 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594325F256EACAD00ECDC58 /* ChatModels.swift */; };
 		95943264256EC51B00ECDC58 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95943263256EC51B00ECDC58 /* StorageManager.swift */; };
@@ -39,7 +42,7 @@
 		9561C46A2556FA170028BD21 /* ChatTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9561C46D2556FA170028BD21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9561C46F2556FA170028BD21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9561C4712556FA170028BD21 /* ConvarsationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvarsationsViewController.swift; sourceTree = "<group>"; };
+		9561C4712556FA170028BD21 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		9561C4742556FA170028BD21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9561C4762556FA190028BD21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9561C4792556FA190028BD21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +53,9 @@
 		9561C491255713A70028BD21 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		9561C494255713C90028BD21 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9561C497255713DE0028BD21 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
+		956E6F2D2572013500D13ECA /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		956E6F302572017000D13ECA /* ConversationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsModels.swift; sourceTree = "<group>"; };
+		956E6F342572021100D13ECA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9576F86D256571EF00D25D6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9594325F256EACAD00ECDC58 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		95943263256EC51B00ECDC58 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -129,7 +135,7 @@
 		9561C482255709B00028BD21 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9561C4712556FA170028BD21 /* ConvarsationsViewController.swift */,
+				9561C4712556FA170028BD21 /* ConversationsViewController.swift */,
 				95609204255CE2E3001A62E7 /* Welcome, Sign In, Sign Up */,
 				952BFAA6256E14C8000DF165 /* ChatViewController.swift */,
 				9561C48E2557138D0028BD21 /* ProfileViewController.swift */,
@@ -166,6 +172,9 @@
 			isa = PBXGroup;
 			children = (
 				9594325F256EACAD00ECDC58 /* ChatModels.swift */,
+				956E6F2D2572013500D13ECA /* SearchResult.swift */,
+				956E6F302572017000D13ECA /* ConversationsModels.swift */,
+				956E6F342572021100D13ECA /* ProfileViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -305,18 +314,21 @@
 			files = (
 				9561C48F2557138D0028BD21 /* ProfileViewController.swift in Sources */,
 				95460EB02566C33E00FEEBDF /* DatabaseManager.swift in Sources */,
+				956E6F2E2572013500D13ECA /* SearchResult.swift in Sources */,
 				95609208255CE3F3001A62E7 /* WelcomeViewController.swift in Sources */,
 				95943260256EACAD00ECDC58 /* ChatModels.swift in Sources */,
 				9561C489255710540028BD21 /* SignInViewController.swift in Sources */,
 				9561C48C2557137A0028BD21 /* SignUpViewController.swift in Sources */,
 				9561C492255713A70028BD21 /* PhotoViewerViewController.swift in Sources */,
-				9561C4722556FA170028BD21 /* ConvarsationsViewController.swift in Sources */,
+				9561C4722556FA170028BD21 /* ConversationsViewController.swift in Sources */,
 				954CFAAD256D6656000D7698 /* Extensions.swift in Sources */,
 				9561C495255713C90028BD21 /* VideoPlayerViewController.swift in Sources */,
 				952BFAA7256E14C8000DF165 /* ChatViewController.swift in Sources */,
+				956E6F352572021100D13ECA /* ProfileViewModel.swift in Sources */,
 				9561C498255713DE0028BD21 /* NewConversationViewController.swift in Sources */,
 				95943264256EC51B00ECDC58 /* StorageManager.swift in Sources */,
 				9561C46E2556FA170028BD21 /* AppDelegate.swift in Sources */,
+				956E6F312572017000D13ECA /* ConversationsModels.swift in Sources */,
 				9561C4702556FA170028BD21 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +478,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatTogether/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -486,6 +499,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatTogether/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
