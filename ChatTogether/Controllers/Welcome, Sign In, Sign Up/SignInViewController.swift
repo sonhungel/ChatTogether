@@ -331,7 +331,25 @@ class SignInViewController: UIViewController {
             
             let user = result.user
             
+            let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+            DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
+                switch result {
+                case .success(let data):
+                    guard let userData = data as? [String: Any],
+                          let userName = userData["User_name"] as? String else {
+                        return
+                    }
+                    print("Ten cua userName:\(userName)")
+                    UserDefaults.standard.set(userName, forKey: "name")
+                    
+                case .failure(let error):
+                    print("Failed to read data with error \(error)")
+                }
+            })
+            
             UserDefaults.standard.setValue(email, forKey: "email")
+            UserDefaults.standard.setValue(email, forKey: "email")
+
             
             print("Logged In user :\(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
@@ -411,6 +429,8 @@ extension SignInViewController :LoginButtonDelegate{
             }
             
             UserDefaults.standard.setValue(email, forKey: "email")
+            UserDefaults.standard.setValue(userName, forKey: "name")
+
             
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {

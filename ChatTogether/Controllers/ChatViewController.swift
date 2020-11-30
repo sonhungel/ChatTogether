@@ -97,16 +97,15 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         }
         
         print("Sending :\(text)")
-        
+        let message = Message(sender: selfSender, messageId: messageID, sentDate: Date(), kind: .text(text))
+
         // send message
         if isNewConversation {
             // Need to create new conv on Database
-            let message = Message(sender: selfSender, messageId: messageID, sentDate: Date(), kind: .text(text))
-            
-            DatabaseManager.shared.createNewConversation(with: otherUserEmail,name: self.title ?? "User", firstMessage: message, completion: { success in
+            DatabaseManager.shared.createNewConversation(with: otherUserEmail,name: self.title ?? "User", firstMessage: message, completion: { [weak self]success in
                 if success {
                     print("message sent")
-
+                    self?.isNewConversation = false
                 }
                 else {
                     print("faield ot send")
@@ -115,6 +114,19 @@ extension ChatViewController : InputBarAccessoryViewDelegate{
         }
         else{
             // append to existing conversation data
+            
+            guard let conversationID = conversationId, let name = self.title else {
+                return
+            }
+            DatabaseManager.shared.sendMessage(to: conversationID, otherUserEmail:otherUserEmail , name: name, newMessage: message, completion: {success in
+                if success {
+                    print("message sent")
+                    
+                }
+                else {
+                    print("faield ot send")
+                }
+            })
         }
     }
     
