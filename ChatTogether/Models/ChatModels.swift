@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 import MessageKit
 
 struct Message: MessageType {
@@ -46,4 +47,16 @@ struct Sender:SenderType {
    public var photoURL : String
    public var senderId: String
    public var displayName: String
+}
+
+struct Media: MediaItem {
+    var url: URL?
+    var image: UIImage?
+    var placeholderImage: UIImage
+    var size: CGSize
+}
+
+struct Location: LocationItem {
+    var location: CLLocation
+    var size: CGSize
 }
