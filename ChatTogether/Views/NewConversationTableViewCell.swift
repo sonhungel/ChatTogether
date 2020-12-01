@@ -53,8 +53,7 @@ class NewConversationTableViewCell: UITableViewCell {
             make.top.equalTo(contentView.snp.top)
             make.leading.equalTo(userImageView.snp.trailing).offset(10)
             make.trailing.equalTo(contentView.snp.trailing)
-            make.size.equalTo(CGSize(width: contentView.frame.width - 20 - userImageView.frame.width,
-                                     height: (contentView.frame.height-20)/2))
+            make.bottom.equalTo(contentView.snp.bottom)
         }
 
     }

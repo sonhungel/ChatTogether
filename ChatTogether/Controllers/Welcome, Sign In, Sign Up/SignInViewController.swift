@@ -147,11 +147,11 @@ class SignInViewController: UIViewController {
     
     private let faceBookLoginButton: FBLoginButton = {
         let button = FBLoginButton()
-        button.permissions = ["public_profile", "email"]
+//        button.permissions = ["public_profile", "email"]
         
         // normal
-        button.setTitleColor(.clear, for: .normal)
-        button.setImage(UIImage(named: "facebook"), for: .normal)
+ //       button.setTitleColor(.clear, for: .normal)
+ //       button.setImage(UIImage(named: "facebook"), for: .normal)
 
         //button.setBackgroundImage(nil, for: .normal)
         
