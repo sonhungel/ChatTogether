@@ -8,6 +8,6 @@
 import Foundation
 
 struct SearchResult {
-    let name: String
-    let email: String
+    let userName: String
+    let emailAddress: String
 }

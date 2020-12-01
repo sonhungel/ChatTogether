@@ -28,6 +28,7 @@
 		956E6F312572017000D13ECA /* ConversationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F302572017000D13ECA /* ConversationsModels.swift */; };
 		956E6F352572021100D13ECA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F342572021100D13ECA /* ProfileViewModel.swift */; };
 		9576F86E256571EF00D25D6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9576F86D256571EF00D25D6B /* GoogleService-Info.plist */; };
+		957E5517257642A900B370E4 /* NewConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E5516257642A900B370E4 /* NewConversationTableViewCell.swift */; };
 		95943260256EACAD00ECDC58 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594325F256EACAD00ECDC58 /* ChatModels.swift */; };
 		95943264256EC51B00ECDC58 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95943263256EC51B00ECDC58 /* StorageManager.swift */; };
 		9597AA7A2573F0BD005B0DB8 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597AA792573F0BD005B0DB8 /* ConversationTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 		956E6F302572017000D13ECA /* ConversationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsModels.swift; sourceTree = "<group>"; };
 		956E6F342572021100D13ECA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9576F86D256571EF00D25D6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		957E5516257642A900B370E4 /* NewConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationTableViewCell.swift; sourceTree = "<group>"; };
 		9594325F256EACAD00ECDC58 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		95943263256EC51B00ECDC58 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		9597AA792573F0BD005B0DB8 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				9561C4762556FA190028BD21 /* Assets.xcassets */,
 				9561C4782556FA190028BD21 /* LaunchScreen.storyboard */,
 				9597AA792573F0BD005B0DB8 /* ConversationTableViewCell.swift */,
+				957E5516257642A900B370E4 /* NewConversationTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				9597AA7A2573F0BD005B0DB8 /* ConversationTableViewCell.swift in Sources */,
 				95943264256EC51B00ECDC58 /* StorageManager.swift in Sources */,
 				9561C46E2556FA170028BD21 /* AppDelegate.swift in Sources */,
+				957E5517257642A900B370E4 /* NewConversationTableViewCell.swift in Sources */,
 				956E6F312572017000D13ECA /* ConversationsModels.swift in Sources */,
 				9561C4702556FA170028BD21 /* SceneDelegate.swift in Sources */,
 			);
