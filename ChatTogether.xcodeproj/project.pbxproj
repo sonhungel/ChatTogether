@@ -32,6 +32,7 @@
 		95943260256EACAD00ECDC58 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594325F256EACAD00ECDC58 /* ChatModels.swift */; };
 		95943264256EC51B00ECDC58 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95943263256EC51B00ECDC58 /* StorageManager.swift */; };
 		9597AA7A2573F0BD005B0DB8 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597AA792573F0BD005B0DB8 /* ConversationTableViewCell.swift */; };
+		95E5AC3D257743FF000EA1BB /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E5AC3C257743FF000EA1BB /* LocationPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		9594325F256EACAD00ECDC58 /* ChatModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
 		95943263256EC51B00ECDC58 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		9597AA792573F0BD005B0DB8 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		95E5AC3C257743FF000EA1BB /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		D1C43BD730D0C3F5E02B4565 /* Pods-ChatTogether.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatTogether.release.xcconfig"; path = "Target Support Files/Pods-ChatTogether/Pods-ChatTogether.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 				9561C491255713A70028BD21 /* PhotoViewerViewController.swift */,
 				9561C494255713C90028BD21 /* VideoPlayerViewController.swift */,
 				9561C497255713DE0028BD21 /* NewConversationViewController.swift */,
+				95E5AC3C257743FF000EA1BB /* LocationPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9561C48F2557138D0028BD21 /* ProfileViewController.swift in Sources */,
+				95E5AC3D257743FF000EA1BB /* LocationPickerViewController.swift in Sources */,
 				95460EB02566C33E00FEEBDF /* DatabaseManager.swift in Sources */,
 				956E6F2E2572013500D13ECA /* SearchResult.swift in Sources */,
 				95609208255CE3F3001A62E7 /* WelcomeViewController.swift in Sources */,

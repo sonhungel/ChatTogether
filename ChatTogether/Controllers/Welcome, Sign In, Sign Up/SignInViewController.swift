@@ -147,11 +147,16 @@ class SignInViewController: UIViewController {
     
     private let faceBookLoginButton: FBLoginButton = {
         let button = FBLoginButton()
-//        button.permissions = ["public_profile", "email"]
+        button.permissions = ["public_profile", "email"]
+        //button.layer.cornerRadius = 30
+        button.clipsToBounds = true
+        
         
         // normal
  //       button.setTitleColor(.clear, for: .normal)
- //       button.setImage(UIImage(named: "facebook"), for: .normal)
+
+       // button.setImage(UIImage(named: "facebook"), for: .normal)
+        button.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
 
         //button.setBackgroundImage(nil, for: .normal)
         
@@ -292,10 +297,12 @@ class SignInViewController: UIViewController {
         
         faceBookLoginButton.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(questionLabel.snp.bottom)
-            //make.bottom.equalTo(self.view)
+            //make.size.equalTo(CGSize(width: 20, height: 20))
+            make.centerX.equalTo(self.view.snp.centerX)
         }
         googleLoginButton.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(faceBookLoginButton.snp.bottom)
+            make.centerX.equalTo(self.view.snp.centerX)
         }
         
     }

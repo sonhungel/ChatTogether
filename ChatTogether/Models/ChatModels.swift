@@ -49,7 +49,7 @@ struct Sender:SenderType {
    public var displayName: String
 }
 
-struct Media: MediaItem {
+struct Media: MediaItem { 
     var url: URL?
     var image: UIImage?
     var placeholderImage: UIImage

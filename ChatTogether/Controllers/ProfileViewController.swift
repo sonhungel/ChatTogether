@@ -19,12 +19,55 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-     let data = ["Log Out"]
+    var data = [ProfileViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Name: \(UserDefaults.standard.value(forKey:"name") as? String ?? "No Name")",
+                                     handler: nil))
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Email: \(UserDefaults.standard.value(forKey:"email") as? String ?? "No Email")",
+                                     handler: nil))
+        
+        data.append(ProfileViewModel(viewModelType: .logout, title: "Log Out", handler: { [weak self] in
+            
+            guard let strongSelf = self else {
+                            return
+                        }
+            let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            
+            actionSheet.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                // Log Out Facebook
+                FBSDKLoginKit.LoginManager().logOut()
+                // Google Sign Out
+                GIDSignIn.sharedInstance()?.signOut()
+                
+                do {
+                    try FirebaseAuth.Auth.auth().signOut()
+                    let vc = WelcomeViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.isNavigationBarHidden = true
+                    strongSelf.present(nav, animated: true, completion: nil)
+                }
+                catch{
+                    print("Failed to Log Out")
+                }
+                
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            strongSelf.present(actionSheet, animated: true, completion: nil)
+        }))
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -85,42 +128,32 @@ extension ProfileViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
-        cell.textLabel?.textAlignment = .center
-        cell.textLabel?.textColor = .red
+        let viewModel = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier,for: indexPath) as! ProfileTableViewCell
+        cell.setUp(with: viewModel)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] _ in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            // Log Out Facebook
-            FBSDKLoginKit.LoginManager().logOut()
-            // Google Sign Out
-            GIDSignIn.sharedInstance()?.signOut()
-            
-            do {
-                try FirebaseAuth.Auth.auth().signOut()
-                let vc = WelcomeViewController()
-                let nav = UINavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
-                nav.isNavigationBarHidden = true
-                strongSelf.present(nav, animated: true, completion: nil)
-            }
-            catch{
-                print("Failed to Log Out")
-            }
-            
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(actionSheet, animated: true, completion: nil)
+        data[indexPath.row].handler?()
     }
     
+}
+
+class ProfileTableViewCell: UITableViewCell {
+
+    static let identifier = "ProfileTableViewCell"
+
+    public func setUp(with viewModel: ProfileViewModel) {
+        self.textLabel?.text = viewModel.title
+        switch viewModel.viewModelType {
+        case .info:
+            textLabel?.textAlignment = .left
+            selectionStyle = .none
+        case .logout:
+            textLabel?.textColor = .red
+            textLabel?.textAlignment = .center
+        }
+    }
+
 }
