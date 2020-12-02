@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import JGProgressHUD
+import SnapKit
 
 class ConversationsViewController: UIViewController {
     
@@ -42,8 +43,7 @@ class ConversationsViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(noConvarsationsLabel)
         setupTableView()
-        fetchConvarsations()
-        startListeningForConversations()
+         startListeningForConversations()
         
         loginObserver = NotificationCenter.default.addObserver(forName: Notification.Name.didLogInNotification , object: nil, queue: .main, using: { [weak self]_ in
           
@@ -59,6 +59,10 @@ class ConversationsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        noConvarsationsLabel.frame = CGRect(x: 10,
+                                            y: (view.frame.height-100)/2,
+                                            width: view.frame.width-20,
+                                            height: 100)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,11 +88,6 @@ class ConversationsViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func fetchConvarsations()
-    {
-        tableView.isHidden = false
-    }
-    
     private func startListeningForConversations(){
         
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -108,20 +107,20 @@ class ConversationsViewController: UIViewController {
             case .success(let conversations):
                 print("successfully got conversation models")
                 guard !conversations.isEmpty else {
-//                    self?.tableView.isHidden = true
-//                    self?.noConversationsLabel.isHidden = false
+                    self?.tableView.isHidden = true
+                    self?.noConvarsationsLabel.isHidden = false
                     return
                 }
-//                self?.noConversationsLabel.isHidden = true
-//                self?.tableView.isHidden = false
+                self?.noConvarsationsLabel.isHidden = true
+                self?.tableView.isHidden = false
                 self?.conversations = conversations
               
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             case .failure(let error):
-//                self?.tableView.isHidden = true
-//                self?.noConversationsLabel.isHidden = false
+                self?.tableView.isHidden = true
+                self?.noConvarsationsLabel.isHidden = false
                 print("failed to get convos: \(error)")
             }
         })

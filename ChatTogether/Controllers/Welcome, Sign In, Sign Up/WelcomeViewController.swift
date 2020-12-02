@@ -70,36 +70,36 @@ class WelcomeViewController: UIViewController {
     
         imageBackground.snp.makeConstraints { (make) ->Void in
             //make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 120, left: 40, bottom: 250, right: 40))
-            make.center.equalTo(self.view)
+            make.center.equalTo(view)
         }
 
         imageDecorTop.snp.makeConstraints { (make) ->Void in
-            make.top.equalTo(self.view)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view).offset(-200)
+            make.top.equalTo(view)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view).offset(-200)
             make.bottom.lessThanOrEqualTo(imageBackground.snp.top)
         }
         
         imageDecorBottom.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.bottom).offset(50)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view).offset(-300)
-            make.bottom.equalTo(self.view)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view).offset(-300)
+            make.bottom.equalTo(view)
         }
 
         loginButton.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.bottom).offset(25)
-            make.leading.equalTo(self.view).offset(80)
-            make.trailing.equalTo(self.view).offset(-80)
-            make.bottom.lessThanOrEqualTo(self.view.snp.bottom).offset(-100)
+            make.leading.equalTo(view).offset(80)
+            make.trailing.equalTo(view).offset(-80)
+            make.bottom.lessThanOrEqualTo(view.snp.bottom).offset(-100)
             make.height.equalTo(55)
         }
         
         welcomeText.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.top).offset(-40)
             make.size.equalTo(CGSize(width: 300, height: 50))
-            make.leading.equalTo(self.view).offset(40)
-            make.trailing.equalTo(self.view).offset(-40)
+            make.leading.equalTo(view).offset(40)
+            make.trailing.equalTo(view).offset(-40)
         }
         
     }

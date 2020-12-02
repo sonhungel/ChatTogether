@@ -10,8 +10,10 @@ import FirebaseDatabase
 import MessageKit
 import CoreLocation
 
+/// Manager object to read and write data to real time firebase database
 final class DatabaseManager
 {
+    /// Shared instance of class
     static let shared = DatabaseManager()
     
     private let database = Database.database().reference()
@@ -387,7 +389,7 @@ extension DatabaseManager{
         })
     }
     
-    /// Gets all mmessages for a given conversatino
+    /// Gets all mmessages for a given conversation
     public func getAllMessagesForConversation(with id: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         database.child("\(id)/messages").observe(.value, with: {snapshot in
             guard let value = snapshot.value as? [[String: Any]] else{

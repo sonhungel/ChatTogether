@@ -22,7 +22,6 @@
 		9561C48C2557137A0028BD21 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C48B2557137A0028BD21 /* SignUpViewController.swift */; };
 		9561C48F2557138D0028BD21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C48E2557138D0028BD21 /* ProfileViewController.swift */; };
 		9561C492255713A70028BD21 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C491255713A70028BD21 /* PhotoViewerViewController.swift */; };
-		9561C495255713C90028BD21 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C494255713C90028BD21 /* VideoPlayerViewController.swift */; };
 		9561C498255713DE0028BD21 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561C497255713DE0028BD21 /* NewConversationViewController.swift */; };
 		956E6F2E2572013500D13ECA /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F2D2572013500D13ECA /* SearchResult.swift */; };
 		956E6F312572017000D13ECA /* ConversationsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E6F302572017000D13ECA /* ConversationsModels.swift */; };
@@ -54,7 +53,6 @@
 		9561C48B2557137A0028BD21 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9561C48E2557138D0028BD21 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9561C491255713A70028BD21 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
-		9561C494255713C90028BD21 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		9561C497255713DE0028BD21 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		956E6F2D2572013500D13ECA /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		956E6F302572017000D13ECA /* ConversationsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsModels.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 				952BFAA6256E14C8000DF165 /* ChatViewController.swift */,
 				9561C48E2557138D0028BD21 /* ProfileViewController.swift */,
 				9561C491255713A70028BD21 /* PhotoViewerViewController.swift */,
-				9561C494255713C90028BD21 /* VideoPlayerViewController.swift */,
 				9561C497255713DE0028BD21 /* NewConversationViewController.swift */,
 				95E5AC3C257743FF000EA1BB /* LocationPickerViewController.swift */,
 			);
@@ -201,6 +198,7 @@
 				9561C4682556FA170028BD21 /* Resources */,
 				C5EF3607CD79DAE2AED60250 /* [CP] Embed Pods Frameworks */,
 				ADF71FFA94EC05AED38745F2 /* [CP] Copy Pods Resources */,
+				955F08472577DD130025E908 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -280,6 +278,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		955F08472577DD130025E908 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		ADF71FFA94EC05AED38745F2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,7 +348,6 @@
 				9561C492255713A70028BD21 /* PhotoViewerViewController.swift in Sources */,
 				9561C4722556FA170028BD21 /* ConversationsViewController.swift in Sources */,
 				954CFAAD256D6656000D7698 /* Extensions.swift in Sources */,
-				9561C495255713C90028BD21 /* VideoPlayerViewController.swift in Sources */,
 				952BFAA7256E14C8000DF165 /* ChatViewController.swift in Sources */,
 				956E6F352572021100D13ECA /* ProfileViewModel.swift in Sources */,
 				9561C498255713DE0028BD21 /* NewConversationViewController.swift in Sources */,

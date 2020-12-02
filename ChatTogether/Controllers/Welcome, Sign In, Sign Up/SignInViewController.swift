@@ -214,7 +214,7 @@ class SignInViewController: UIViewController {
         emailTextField.leftView = imageEmail
         passwordTextField.leftView = imagePass
         
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
     
 
     }
@@ -236,43 +236,43 @@ class SignInViewController: UIViewController {
 
         imageBackground.snp.makeConstraints { (make) ->Void in
             
-            make.top.greaterThanOrEqualTo(self.view).offset(100)
-            make.leading.equalTo(self.view).offset(25)
-            make.trailing.equalTo(self.view).offset(-25)
+            make.top.greaterThanOrEqualTo(view).offset(100)
+            make.leading.equalTo(view).offset(25)
+            make.trailing.equalTo(view).offset(-25)
         }
 
         imageDecorTop.snp.makeConstraints { (make) ->Void in
-            make.top.equalTo(self.view)
-            make.leading.equalTo(self.view)
+            make.top.equalTo(view)
+            make.leading.equalTo(view)
             make.size.equalTo(CGSize(width: 150, height: 170))
             
         }
 
         imageDecorBottom.snp.makeConstraints { (make) ->Void in
             make.size.equalTo(CGSize(width: 170, height: 150))
-            make.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
         }
 
         emailTextField.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.bottom).offset(10)
             make.height.equalTo(60)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
         }
         passwordTextField.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(emailTextField.snp.bottom).offset(10)
             make.height.equalTo(60)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
         }
         
 
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(passwordTextField.snp.bottom).offset(20)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
             make.height.equalTo(60)
         }
 
@@ -280,14 +280,14 @@ class SignInViewController: UIViewController {
         loginText.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.top).offset(-40)
             make.size.equalTo(CGSize(width: 300, height: 50))
-            make.leading.equalTo(self.view).offset(40)
-            make.trailing.equalTo(self.view).offset(-40)
+            make.leading.equalTo(view).offset(40)
+            make.trailing.equalTo(view).offset(-40)
         }
 
         questionLabel.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(loginButton.snp.bottom).offset(20)
             
-            make.centerX.equalTo(self.view.snp.centerX).offset(-40)
+            make.centerX.equalTo(view.snp.centerX).offset(-40)
             //make.trailing.equalTo(self.view).offset(-40)
         }
         signUpButton.snp.makeConstraints { (make) ->Void in
@@ -298,11 +298,11 @@ class SignInViewController: UIViewController {
         faceBookLoginButton.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(questionLabel.snp.bottom)
             //make.size.equalTo(CGSize(width: 20, height: 20))
-            make.centerX.equalTo(self.view.snp.centerX)
+            make.centerX.equalTo(view.snp.centerX)
         }
         googleLoginButton.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(faceBookLoginButton.snp.bottom)
-            make.centerX.equalTo(self.view.snp.centerX)
+            make.centerX.equalTo(view.snp.centerX)
         }
         
     }
@@ -339,6 +339,10 @@ class SignInViewController: UIViewController {
             let user = result.user
             
             let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+            
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "name")
+            
             DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
                 switch result {
                 case .success(let data):
@@ -346,16 +350,15 @@ class SignInViewController: UIViewController {
                           let userName = userData["User_name"] as? String else {
                         return
                     }
-                    print("Ten cua userName:\(userName)")
+                    print("Ten cua userName: \(userName)")
                     UserDefaults.standard.set(userName, forKey: "name")
                     
                 case .failure(let error):
                     print("Failed to read data with error \(error)")
                 }
             })
-            
             UserDefaults.standard.setValue(email, forKey: "email")
-            UserDefaults.standard.setValue(email, forKey: "email")
+          
 
             
             print("Logged In user :\(user)")
@@ -434,6 +437,9 @@ extension SignInViewController :LoginButtonDelegate{
                 print("Faield to get email and name from fb result")
                 return
             }
+            
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "name")
             
             UserDefaults.standard.setValue(email, forKey: "email")
             UserDefaults.standard.setValue(userName, forKey: "name")

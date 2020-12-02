@@ -237,50 +237,50 @@ class SignUpViewController: UIViewController {
         
         imageBackground.snp.makeConstraints { (make) ->Void in
             
-            make.top.greaterThanOrEqualTo(self.view).offset(35)
-            make.leading.equalTo(self.view).offset(45)
-            make.trailing.equalTo(self.view).offset(-45)
-            make.bottom.equalTo(self.view).offset(-400)
+            make.top.greaterThanOrEqualTo(view).offset(35)
+            make.leading.equalTo(view).offset(45)
+            make.trailing.equalTo(view).offset(-45)
+            make.bottom.equalTo(view).offset(-400)
         }
         
         imageDecorTop.snp.makeConstraints { (make) ->Void in
-            make.top.equalTo(self.view)
-            make.leading.equalTo(self.view)
+            make.top.equalTo(view)
+            make.leading.equalTo(view)
             make.size.equalTo(CGSize(width: 130, height: 150))
             
         }
         
         imageDecorBottom.snp.makeConstraints { (make) ->Void in
             make.size.equalTo(CGSize(width: 170, height: 150))
-            make.leading.equalTo(self.view)
-            make.bottom.equalTo(self.view)
+            make.leading.equalTo(view)
+            make.bottom.equalTo(view)
         }
         
         userNameTextField.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.bottom).offset(5)
             make.height.equalTo(60)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
         }
         
         emailTextField.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(userNameTextField.snp.bottom).offset(5)
             make.height.equalTo(60)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
         }
         passwordTextField.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(emailTextField.snp.bottom).offset(5)
             make.height.equalTo(60)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
         }
         
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(passwordTextField.snp.bottom).offset(10)
-            make.leading.equalTo(self.view).offset(55)
-            make.trailing.equalTo(self.view).offset(-55)
+            make.leading.equalTo(view).offset(55)
+            make.trailing.equalTo(view).offset(-55)
             //make.bottom.lessThanOrEqualTo(self.view.snp.bottom).offset(-100)
             make.height.equalTo(60)
         }
@@ -289,13 +289,13 @@ class SignUpViewController: UIViewController {
         signUpText.snp.makeConstraints { (make) ->Void in
             make.top.greaterThanOrEqualTo(imageBackground.snp.top).offset(-25)
             make.size.equalTo(CGSize(width: 300, height: 50))
-            make.leading.equalTo(self.view).offset(40)
-            make.trailing.equalTo(self.view).offset(-40)
+            make.leading.equalTo(view).offset(40)
+            make.trailing.equalTo(view).offset(-40)
         }
         
         questionLabel.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(signUpButton.snp.bottom).offset(15)
-            make.centerX.equalTo(self.view.snp.centerX).offset(-30)
+            make.centerX.equalTo(view.snp.centerX).offset(-30)
             //make.trailing.equalTo(self.view).offset(-40)
         }
         signInButton.snp.makeConstraints { (make) ->Void in
@@ -305,7 +305,7 @@ class SignUpViewController: UIViewController {
         orDivider.snp.makeConstraints { (make) ->Void in
             make.top.equalTo(questionLabel.snp.bottom).offset(10)
             make.size.equalTo(CGSize(width: 250, height: 1))
-            make.centerX.equalTo(self.view.snp.centerX)
+            make.centerX.equalTo(view.snp.centerX)
         }
         
     }
@@ -345,6 +345,9 @@ class SignUpViewController: UIViewController {
                     print("Error creating user")
                     return
                 }
+                
+                UserDefaults.standard.setValue(email, forKey: "email")
+                UserDefaults.standard.setValue(userName, forKey: "name")
                 
                 let chatUser = ChatTogetherAppUser(userName: userName, emailAdress: email)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: {success in
@@ -464,7 +467,7 @@ extension SignUpViewController:UIImagePickerControllerDelegate, UINavigationCont
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
-        self.profileImage.image = selectedImage
+        profileImage.image = selectedImage
     }
     
     

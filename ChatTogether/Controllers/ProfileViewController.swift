@@ -45,6 +45,19 @@ class ProfileViewController: UIViewController {
                     return
                 }
                 
+//                UserDefaults.standard.setValue(nil, forKey: "email")
+//                UserDefaults.standard.setValue(nil, forKey: "name")
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "name")
+                
+//                let email = UserDefaults.standard.value(forKey:"email") as? String
+//                let name = UserDefaults.standard.value(forKey:"name") as? String
+//                print("Email: \(email ?? "Deo co email nua"), ten : \(name ?? "Deo co ten nua")")
+//
+                strongSelf.tabBarController?.dismiss(animated: true, completion: nil)
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+              
+                
                 // Log Out Facebook
                 FBSDKLoginKit.LoginManager().logOut()
                 // Google Sign Out
@@ -66,6 +79,7 @@ class ProfileViewController: UIViewController {
             actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             strongSelf.present(actionSheet, animated: true, completion: nil)
+           
         }))
         
         tableView.delegate = self
@@ -76,10 +90,10 @@ class ProfileViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         tableView.snp.makeConstraints({ (make) ->Void in
-            make.top.equalTo(self.view)
-            make.leading.equalTo(self.view)
-            make.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view)
+            make.top.equalTo(view)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
         })
     }
     
@@ -91,7 +105,7 @@ class ProfileViewController: UIViewController {
         let filename = safeEmail + "_profile_picture.png"
         let path = "images/"+filename
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width , height: 300))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width , height: 300))
         headerView.backgroundColor = .link
         
         let imageView = UIImageView(frame: CGRect(x: (headerView.frame.width-150) / 2,
@@ -145,7 +159,7 @@ class ProfileTableViewCell: UITableViewCell {
     static let identifier = "ProfileTableViewCell"
 
     public func setUp(with viewModel: ProfileViewModel) {
-        self.textLabel?.text = viewModel.title
+        textLabel?.text = viewModel.title
         switch viewModel.viewModelType {
         case .info:
             textLabel?.textAlignment = .left

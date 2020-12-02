@@ -53,7 +53,7 @@ class NewConversationViewController: UIViewController {
         tableView.dataSource = self
 
         searchBar.delegate = self
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissSelf))
         
@@ -139,9 +139,9 @@ extension NewConversationViewController:UISearchBarDelegate{
         }
         let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
         
-        self.spinner.dismiss()
+        spinner.dismiss()
         
-        let results: [SearchResult] = self.users.filter({
+        let results: [SearchResult] = users.filter({
             guard let email = $0["emailAddress"], email != safeEmail else {
                 return false
             }
