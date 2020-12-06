@@ -11,3 +11,6 @@ Language : Swift 5.3
 
 FrameWork : CocoaTouch, Snapkit, Firebase, FBSDKLoginKit, GoogleSignIn, MessageKit, RealmSwift, SDWebImage
 
+Database : Firebase realtime Database, Firebase Storage, Firebase Authentication
+
+Device : Any IOS Device (ARM64) with IOS 14 +

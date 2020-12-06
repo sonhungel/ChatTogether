@@ -12,11 +12,12 @@ import SnapKit
 
 class ConversationsViewController: UIViewController {
     
+    
     private let spinner = JGProgressHUD(style: .dark)
     
     private var conversations = [Conversation]()
     
-    private let tableView:UITableView = {
+    public let tableView:UITableView = {
         let tableView = UITableView()
         tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
         tableView.isHidden = true
@@ -38,19 +39,21 @@ class ConversationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .secondarySystemBackground
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
         
         view.addSubview(tableView)
         view.addSubview(noConvarsationsLabel)
         setupTableView()
-         startListeningForConversations()
+        startListeningForConversations()
         
         loginObserver = NotificationCenter.default.addObserver(forName: Notification.Name.didLogInNotification , object: nil, queue: .main, using: { [weak self]_ in
-          
+
             guard let strongSelf = self else {
                 return
             }
-            
+
             strongSelf.startListeningForConversations()
         })
         
@@ -69,6 +72,7 @@ class ConversationsViewController: UIViewController {
         super.viewDidAppear(animated)
         validateAuth()
     }
+ 
     
     private func validateAuth()
     {
@@ -81,6 +85,13 @@ class ConversationsViewController: UIViewController {
             
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //reload()
+        startListeningForConversations()
+    }
+    
     
     private func setupTableView()
     {
@@ -124,6 +135,12 @@ class ConversationsViewController: UIViewController {
                 print("failed to get convos: \(error)")
             }
         })
+    }
+    
+    public func reload(){
+        self.conversations.removeAll()
+        startListeningForConversations()
+        tableView.reloadData()
     }
     
     // choose New Convarsation
@@ -238,5 +255,7 @@ extension ConversationsViewController: UITableViewDataSource,UITableViewDelegate
             tableView.endUpdates()
         }
     }
+    
+
 }
 

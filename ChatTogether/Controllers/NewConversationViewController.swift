@@ -58,6 +58,8 @@ class NewConversationViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissSelf))
         
         searchBar.becomeFirstResponder()
+        
+        view.backgroundColor = .secondarySystemBackground
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

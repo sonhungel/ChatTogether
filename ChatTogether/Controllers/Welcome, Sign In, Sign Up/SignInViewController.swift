@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 import JGProgressHUD
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController{
     
     private let spinner = JGProgressHUD(style: .dark)
 //    setup entities
@@ -86,14 +86,11 @@ class SignInViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         field.layer.cornerRadius = 30
-        field.placeholder = "Your Email"
-//        let imageView = UIImageView(image: UIImage(named: "icon_email"))
-//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-//        field.leftView = imageView
-        
+//        field.placeholder = "Your Email"
         field.leftViewMode = .always
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
+        field.attributedPlaceholder = NSAttributedString(string: "Your Email",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         return field
 
     }()
@@ -104,15 +101,11 @@ class SignInViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .done
         field.layer.cornerRadius = 30
- 
-        field.placeholder = "Your Password"
-//        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
-//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-//        field.leftView = imageView
+//        field.placeholder = "Your Password"
         field.leftViewMode = .always
-        
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
+        field.attributedPlaceholder = NSAttributedString(string: "Your Password",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         field.isSecureTextEntry = true
         return field
     }()
@@ -216,6 +209,7 @@ class SignInViewController: UIViewController {
         
         hideKeyboardWhenTappedAround()
     
+        tabBarController?.delegate = self
 
     }
     
@@ -318,7 +312,7 @@ class SignInViewController: UIViewController {
         }
         
         spinner.show(in: view)
-        
+
         // firebase sign in
         
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: pass) { [weak self ]authResult, error in
@@ -340,9 +334,6 @@ class SignInViewController: UIViewController {
             
             let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
             
-            UserDefaults.standard.removeObject(forKey: "email")
-            UserDefaults.standard.removeObject(forKey: "name")
-            
             DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
                 switch result {
                 case .success(let data):
@@ -359,11 +350,10 @@ class SignInViewController: UIViewController {
             })
             UserDefaults.standard.setValue(email, forKey: "email")
           
-
-            
             print("Logged In user :\(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         }
+
     }
     
     @objc private func signUpButtonTapped()
@@ -502,3 +492,7 @@ extension SignInViewController :LoginButtonDelegate{
     }
 }
 
+
+extension SignInViewController: UITabBarControllerDelegate {
+
+}

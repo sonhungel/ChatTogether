@@ -87,12 +87,10 @@ class SignUpViewController: UIViewController {
         field.returnKeyType = .continue
         field.layer.cornerRadius = 30
         field.placeholder = "Your Email"
-//        let imageView = UIImageView(image: UIImage(named: "icon_email"))
-//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-//        field.leftView = imageView
         field.leftViewMode = .always
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
+        field.attributedPlaceholder = NSAttributedString(string: "Your Email",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         return field
         
     }()
@@ -104,12 +102,10 @@ class SignUpViewController: UIViewController {
         field.returnKeyType = .done
         field.layer.cornerRadius = 30
         field.placeholder = "Your Password"
-//        let imageView = UIImageView(image: UIImage(named: "icon_pass"))
-//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-//        field.leftView = imageView
         field.leftViewMode = .always
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
+        field.attributedPlaceholder = NSAttributedString(string: "Your Email",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         field.isSecureTextEntry = true
         return field
     }()
@@ -121,15 +117,11 @@ class SignUpViewController: UIViewController {
         field.returnKeyType = .done
         field.layer.cornerRadius = 30
         field.placeholder = "Your Name"
-        
-//        let imageView = UIImageView(image: UIImage(named: "icon_user"))
-//        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-//        imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-//        field.leftView = imageView
         field.leftViewMode = .always
         field.rightViewMode = .always
-       
         field.backgroundColor = UIColor(red: 239/255, green: 232/255, blue: 253/255, alpha: 1)
+        field.attributedPlaceholder = NSAttributedString(string: "Your Name",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         return field
     }()
     
@@ -137,10 +129,6 @@ class SignUpViewController: UIViewController {
  
         let addImageButton = UIButton()
         var imageButton = UIImage(named: "icon_addImage")
-        //imageButton = imageButton?.withRenderingMode(.alwaysTemplate)
-        //imageButton?.withTintColor(UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9))
-        //imageButton.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        //addImageButton.backgroundColor = .black
         addImageButton.setImage(imageButton, for: .normal)
         return addImageButton
     }()
@@ -151,8 +139,6 @@ class SignUpViewController: UIViewController {
         let imageView = UIImageView(image: UIImage(named: "icon_email"))
         imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-       
-        //imageView.backgroundColor = .black
         imageView.center = view.center
         view.addSubview(imageView)
         return view
@@ -164,8 +150,6 @@ class SignUpViewController: UIViewController {
         let imageView = UIImageView(image: UIImage(named: "icon_pass"))
         imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        
-        //imageView.backgroundColor = .black
         imageView.center = view.center
         view.addSubview(imageView)
         return view
@@ -177,8 +161,6 @@ class SignUpViewController: UIViewController {
         let imageView = UIImageView(image: UIImage(named: "icon_user"))
         imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor(red: 98/255, green: 58/255, blue: 154/255, alpha: 0.9)
-        
-        //imageView.backgroundColor = .black
         imageView.center = view.center
         view.addSubview(imageView)
         return view

@@ -45,18 +45,17 @@ class ProfileViewController: UIViewController {
                     return
                 }
                 
-//                UserDefaults.standard.setValue(nil, forKey: "email")
-//                UserDefaults.standard.setValue(nil, forKey: "name")
-                UserDefaults.standard.removeObject(forKey: "email")
-                UserDefaults.standard.removeObject(forKey: "name")
+                UserDefaults.standard.setValue(nil, forKey: "email")
+                UserDefaults.standard.setValue(nil, forKey: "name")
+//                UserDefaults.standard.removeObject(forKey: "email")
+//                UserDefaults.standard.removeObject(forKey: "name")
                 
 //                let email = UserDefaults.standard.value(forKey:"email") as? String
 //                let name = UserDefaults.standard.value(forKey:"name") as? String
 //                print("Email: \(email ?? "Deo co email nua"), ten : \(name ?? "Deo co ten nua")")
 //
-                strongSelf.tabBarController?.dismiss(animated: true, completion: nil)
-                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
-              
+//                strongSelf.tabBarController?.dismiss(animated: true, completion: nil)
+//                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
                 
                 // Log Out Facebook
                 FBSDKLoginKit.LoginManager().logOut()
@@ -96,6 +95,11 @@ class ProfileViewController: UIViewController {
             make.bottom.equalTo(view)
         })
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.tableHeaderView = createTableHeader()
+        reload()
+    }
     
     func createTableHeader() -> UIView? {
         guard  let email = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -132,6 +136,69 @@ class ProfileViewController: UIViewController {
         })
         
         return headerView
+    }
+    
+    public func reload()
+    {
+        tableView.tableHeaderView = createTableHeader()
+        
+        data.removeAll()
+        
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Name: \(UserDefaults.standard.value(forKey:"name") as? String ?? "No Name")",
+                                     handler: nil))
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "Email: \(UserDefaults.standard.value(forKey:"email") as? String ?? "No Email")",
+                                     handler: nil))
+        
+        data.append(ProfileViewModel(viewModelType: .logout, title: "Log Out", handler: { [weak self] in
+            
+            guard let strongSelf = self else {
+                            return
+                        }
+            let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            
+            actionSheet.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+//                UserDefaults.standard.setValue(nil, forKey: "email")
+//                UserDefaults.standard.setValue(nil, forKey: "name")
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "name")
+                
+//                let email = UserDefaults.standard.value(forKey:"email") as? String
+//                let name = UserDefaults.standard.value(forKey:"name") as? String
+//                print("Email: \(email ?? "Deo co email nua"), ten : \(name ?? "Deo co ten nua")")
+
+                strongSelf.tabBarController?.dismiss(animated: true, completion: nil)
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+                
+                // Log Out Facebook
+                FBSDKLoginKit.LoginManager().logOut()
+                // Google Sign Out
+                GIDSignIn.sharedInstance()?.signOut()
+                
+                do {
+                    try FirebaseAuth.Auth.auth().signOut()
+                    let vc = WelcomeViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.isNavigationBarHidden = true
+                    strongSelf.present(nav, animated: true, completion: nil)
+                }
+                catch{
+                    print("Failed to Log Out")
+                }
+                
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            strongSelf.present(actionSheet, animated: true, completion: nil)
+           
+        }))
+        tableView.reloadData()
     }
 
 }

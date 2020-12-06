@@ -117,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
             print("Succesfully Sign in with Google Credential")
             NotificationCenter.default.post(name: .didLogInNotification, object: nil)
         })
+
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
