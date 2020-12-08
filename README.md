@@ -1,5 +1,5 @@
 # ChatTogether
-Realtime chat app using swift5 coupled with firebase and running on iphone 7+ with ios 14.0.1
+Realtime chat app using swift5 with firebase and running on iphone 7+ with ios 14.0.1
 
 Summary about this project:
 
